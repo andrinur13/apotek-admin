@@ -25,4 +25,9 @@ Route::get('/product', [ProductController::class, 'product']);
 // product category
 Route::get('/productcategory', [ProductCategoryController::class, 'productCategory']);
 Route::post('/productcategory/add', [ProductCategoryController::class, 'addProductCategory']);
+Route::get('/productcategory/delete/{id}', [ProductCategoryController::class, 'deleteProductCategory']);
+Route::get('/productcategory/get/{id}', [ProductCategoryController::class, 'getProductCategory']);
+Route::POST('/productcategory/edit', [ProductCategoryController::class, 'editProductCategory']);
+
+
 
