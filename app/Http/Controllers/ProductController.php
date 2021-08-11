@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductCategoryModel;
+use App\Models\ProductImageModel;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
+use stdClass;
 
 class ProductController extends Controller
 {
@@ -13,12 +15,55 @@ class ProductController extends Controller
     {
         $this->productcategory = new ProductCategoryModel();
         $this->product = new ProductModel();
+        $this->main_url = url('dashboard/product/');
     }
-    public function product() {
+
+    public function product()
+    {
         $data = [
             'category' => $this->productcategory::orderBy('category')->get(),
-            'product' => $this->product::get()
+            'product' => $this->product->getProduct(),
+            'main_url' => $this->main_url
         ];
+        
         return view('product/product', $data);
+    }
+
+    public function addProduct(Request $request)
+    {
+        $nama_product = $request->nama_product;
+        $kategori = $request->kategori;
+        $berat_product = $request->berat_product;
+        $harga_beli = $request->harga_beli;
+        $harga_jual = $request->harga_jual;
+        $photo_product = $request->file('photo_product');
+
+        $data = [
+            'nama_product' => $nama_product,
+            'berat' => $berat_product,
+            'id_product_category' => $kategori,
+            'harga_beli' => $harga_beli,
+            'harga_jual' => $harga_jual,
+        ];
+
+        $dataInsert = $this->product::create($data);
+        
+        // add image
+        $productImage = new ProductImageModel();
+        
+        // data images
+        $dataImage = new stdClass();
+        $dataImage->id_product = $dataInsert->id_product;
+        $dataImage->img_path = 'testpath';
+
+        $productImage->storeImage($dataImage);
+        
+        return redirect($this->main_url)->with('status', 'Product berhasil ditambahkan');
+    }
+
+    public function deleteProduct($id) {
+        $this->product::where('id_product', $id)->delete();
+
+        return redirect($this->main_url)->with('status', 'Product berhasil dihapus');
     }
 }

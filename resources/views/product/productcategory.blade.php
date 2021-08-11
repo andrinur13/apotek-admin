@@ -122,8 +122,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-sm btn-primary">Tambah</button>
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Ubah</button>
                     </div>
                 </form>
             </div>
@@ -152,7 +152,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-sm btn-primary">Tambah</button>
                 </div>
             </form>

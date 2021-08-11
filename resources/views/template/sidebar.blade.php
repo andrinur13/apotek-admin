@@ -37,6 +37,7 @@
                 <!-- <h6 class="collapse-header">Custom Components:</h6> -->
                 <a class="collapse-item" href="{{url('product')}}">Products</a>
                 <a class="collapse-item" href="{{url('productcategory')}}">Category</a>
+                <a class="collapse-item" href="{{url('productstok')}}">Stok</a>
             </div>
         </div>
     </li>
