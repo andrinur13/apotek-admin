@@ -19,82 +19,69 @@
 
 @section('content')
 <div class="container-fluid" id="app">
+
     <div class="row">
-        <div class="col">
-            <div class="card shadow mb-4">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Product Category</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-sticky-note fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Jumlah kategori obat</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> {{count($productcategory)}} kategori</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-sticky-note fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col">
-                            <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#addcategory">
-                                <i class="fas fa-plus"></i>
-                                Tambah Product Category
-                            </button>
-                        </div>
-                    </div>
+        <div class="col-lg-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <span class="label label-primary">Jumah Kategori</span>
                 </div>
-                <div class="card-body">
-                    <div class="table p-2">
-                        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <!-- <th>No</th> -->
-                                    <th>Nama Category</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php($i = 1)
-                                @foreach($productcategory as $ps)
-                                <tr>
-                                    <!-- <td> {{$i}} </td> -->
-                                    <td> {{$ps->category}} </td>
-                                    <td>
-                                        <div v-on:click="loadData({{$ps->id_product_category}})" data-toggle="modal" data-target="#editcategory" class="btn btn-warning btn-sm btn-circle">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </div>
-                                        <a href="{{url('productcategory/delete/' . $ps->id_product_category)}}" class="btn btn-danger btn-sm btn-circle">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @php($i++)
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"> <?= count($productcategory) ?> kategori </h1>
+                    <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
+                    <!-- <small>Total views</small> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- product category -->
+    <div class="row mt-2">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <button class="btn btn-sm btn-primary mt-2" data-toggle="modal" data-target="#addcategory">
+                        <i class="fa fa-plus"></i>
+                        Tambah Product Category
+                    </button>
+                </div>
+                <div class="ibox-content">
+                    <input type="text" style="padding: 20px;" class="form-control form-control-sm m-b-xs" id="filter" placeholder="Cari">
+
+                    <table class="mt-4 footable table table-hover table-stripped" data-page-size="10" data-filter=#filter>
+                        <thead class="table-bordered">
+                            <tr>
+                                <th>No</th>
+                                <th>Kategori</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-bordered">
+                            @php($i = 1)
+                            @foreach($productcategory as $p)
+                            <tr>
+                                <td> {{$i}} </td>
+                                <td> {{$p->category}} </td>
+                                <td>
+                                    <div class="btn btn-warning btn-sm btn-circle" data-toggle="modal" data-target="#editcategory" v-on:click="loadData({{$p->id_product_category}})">
+                                        <i class="fa fa-pencil"></i>
+                                    </div>
+                                    <a class="btn btn-danger text-white btn-sm btn-circle" data-toggle="modal" data-target="#deleteProduct" v-on:click="handleDeleted({{$p->id_product_category}})">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @php($i++)
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    <ul class="pagination float-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
@@ -110,7 +97,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{url('productcategory/edit')}}">
+                <form method="POST" action="{{url('dashboard/productcategory/edit')}}">
                     {{csrf_field()}}
                     <div class="modal-body">
                         <input type="number" hidden name="id_product_category" v-model="edited.id_product_category">
@@ -126,6 +113,30 @@
                         <button type="submit" class="btn btn-sm btn-primary">Ubah</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete confirmation -->
+    <div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Anda yakin akan menghapus category product ini ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- <div class="modal-body"> -->
+                <form method="POST" id="deleteCategoryProductAction" action="" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </div>
+                </form>
+                <!-- </div> -->
+
             </div>
         </div>
     </div>
@@ -180,15 +191,30 @@
 
         methods: {
             loadData: function(id) {
-                fetch(this.urlSite + 'productcategory/get/' + id).then(resp => resp.json()).then(
+                console.log(id);
+                fetch(this.urlSite + 'dashboard/productcategory/get/' + id).then(resp => resp.json()).then(
                     r => {
                         // console.log(r.product.category);
                         this.edited.id_product_category = r.product.id_product_category;
                         this.edited.category = r.product.category;
                     }
                 )
+            },
+
+            handleDeleted: function(id) {
+                console.log(id);
+                document.getElementById('deleteCategoryProductAction').action = '/dashboard/productcategory/delete/' + id;
             }
         }
     })
+</script>
+<script src="{{asset('theme/js/plugins/footable/footable.all.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+
+        $('.footable').footable();
+        $('.footable2').footable();
+
+    });
 </script>
 @endsection

@@ -24,7 +24,7 @@ class ProductCategoryController extends Controller
             'category' => $nama_category
         ]);
 
-        return redirect('productcategory');
+        return redirect('dashboard/productcategory');
     }
 
     public function deleteProductCategory($id) {
@@ -32,7 +32,7 @@ class ProductCategoryController extends Controller
 
         $productcategorymodel->where('id_product_category', $id)->delete();
 
-        return redirect('productcategory');
+        return redirect('dashboard/productcategory');
     }
 
     public function getProductCategory($id) {
@@ -53,7 +53,7 @@ class ProductCategoryController extends Controller
         $productcategory->category = $category;
         $productcategory->save();
 
-        return redirect('productcategory');
+        return redirect('dashboard/productcategory');
     }
 
 }

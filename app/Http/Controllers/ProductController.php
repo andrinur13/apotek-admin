@@ -25,7 +25,9 @@ class ProductController extends Controller
             'product' => $this->product->getProduct(),
             'main_url' => $this->main_url
         ];
-        
+
+        // dd($data);
+
         return view('product/product', $data);
     }
 
@@ -47,21 +49,51 @@ class ProductController extends Controller
         ];
 
         $dataInsert = $this->product::create($data);
-        
+
         // add image
         $productImage = new ProductImageModel();
-        
+
         // data images
         $dataImage = new stdClass();
         $dataImage->id_product = $dataInsert->id_product;
         $dataImage->img_path = 'testpath';
 
         $productImage->storeImage($dataImage);
-        
+
         return redirect($this->main_url)->with('status', 'Product berhasil ditambahkan');
     }
 
-    public function deleteProduct($id) {
+    public function detailProduct($id)
+    {
+        $data = [
+            'data' => $this->product->getProductDetail($id),
+            'category' => $this->productcategory::get()
+        ];
+
+        // dd($data);
+
+        return view('product/detail', $data);
+    }
+
+    public function updateProduct($id, Request $request)
+    {
+        $data = [
+            'nama_product' => $request->nama_product,
+            'berat' => $request->berat,
+            'id_product_category' => $request->category,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual
+        ];
+
+        // dd($data);
+
+        $this->product->where('id_product', $id)->update($data);
+
+        return redirect('/dashboard/product');
+    }
+
+    public function deleteProduct($id)
+    {
         $this->product::where('id_product', $id)->delete();
 
         return redirect($this->main_url)->with('status', 'Product berhasil dihapus');

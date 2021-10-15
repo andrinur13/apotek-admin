@@ -1,122 +1,85 @@
 @extends('template/default')
 
-@section('custom-css')
-<style>
-    .dataTables_filter {
-        float: right;
-        text-align: right;
-    }
-
-    .dataTable_length {
-        float: left;
-    }
-
-    .dataTables_paginate {
-        float: right;
-    }
-
-    .thead > tr> th:hover {
-        cursor: pointer;
-        background-color: #ffffaa;
-    }
-</style>
-@endsection
-
 @section('content')
-<div class="container-fluid" id="app">
+<div class="container-fluid" id="aplikasi">
     <div class="row">
-        <div class="col">
-            <div class="card shadow mb-4">
-                <div class="card-header">
+        <div class="col-lg-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <span class="label label-primary">Jumah Obat</span>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"> <?= count($product) ?> buah </h1>
+                    <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
+                    <!-- <small>Total views</small> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <button class="btn btn-sm btn-primary mt-2" data-toggle="modal" data-target="#addProduct">
+                        <i class="fa fa-plus"></i>
+                        Tambah Product
+                    </button>
+                </div>
+                <div class="ibox-content">
                     <div class="row">
-                        <div class="col">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Product Data</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-capsules fa-2x text-gray-800"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Jumlah Obat</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> {{count($product)}} Obat</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-capsules fa-2x text-gray-800"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-3">
+                            <div class="mb-2">Tampilkan Jumlah</div>
+                            <select v-on:change="amountShow()" class="form-control" v-model="filled.amount">
+                                <option value="null" id="amountData">Tampilkan Jumlah</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="1000">1000</option>
+                            </select>
                         </div>
                     </div>
                     <hr>
-                    <div class="row">
-                        <div class="col">
-                            <button class="btn btn-sm btn-primary mt-2" data-toggle="modal" data-target="#addProduct">
-                                <i class="fas fa-plus"></i>
-                                Tambah Product
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('status') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @endif
+                    <input type="text" style="padding: 20px;" class="form-control form-control-sm m-b-xs" id="filter" placeholder="Cari">
 
-                    <div class="table p-2" style="font-size: 12px;">
-                        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                            <thead class="thead">
-                                <tr>
-                                    <!-- <th>No</th> -->
-                                    <th>Nama</th>
-                                    <th>Jenis</th>
-                                    <th>Berat</th>
-                                    <th>H. Jual</th>
-                                    <th>H. Beli</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($product as $p)
-                                <tr>
-                                    <td> {{$p->nama_product}} </td>
-                                    <td> {{$p->category}} </td>
-                                    <td> {{$p->berat}} gr </td>
-                                    <td> Rp. {{number_format($p->harga_jual)}} </td>
-                                    <td> Rp. {{number_format($p->harga_beli)}} </td>
-                                    <td>
-                                        <a class="btn btn-success btn-sm btn-circle">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <div class="btn btn-warning btn-sm btn-circle" data-toggle="modal" data-target="#editProduct">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </div>
-                                        <a class="btn btn-danger btn-sm btn-circle" data-toggle="modal" data-target="#deleteProduct" v-on:click="handleDeleted({{$p->id_product}})">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                    <table ref="myFooTable" id="table-content" class="mt-4 footable table table-hover table-stripped" data-page-size="10" data-filter=#filter>
+                        <thead class="table-bordered">
+                            <tr>
+                                <th>Nama</th>
+                                <th>Jenis</th>
+                                <th>Berat</th>
+                                <th>H. Jual</th>
+                                <th>H. Beli</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-bordered">
+                            @foreach($product as $p)
+                            <tr>
+                                <td> {{$p->nama_product}} </td>
+                                <td> {{$p->category}} </td>
+                                <td> {{$p->berat}} gr </td>
+                                <td> Rp. {{number_format($p->harga_jual)}} </td>
+                                <td> Rp. {{number_format($p->harga_beli)}} </td>
+                                <td>
+                                    <a class="btn btn-primary text-white btn-sm btn-circle" href="<?= 'product/detail/' . $p->id_product; ?>">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-danger text-white btn-sm btn-circle" data-toggle="modal" data-target="#deleteProduct" v-on:click="handleDeleted({{$p->id_product}})">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    <ul class="pagination float-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
@@ -317,10 +280,12 @@
 @endsection
 
 @section('script-custom')
+
+
 <script src="{{asset('theme/js/vue.js')}}"></script>
 <script>
     var app = new Vue({
-        el: '#app',
+        el: '#aplikasi',
         data: {
             message: 'Hello Vue!',
             urlSite: '<?= env("APP_URL"); ?>',
@@ -339,7 +304,9 @@
                     berat: null,
                     harga_beli: null,
                     harga_jual: null
-                }
+                },
+                amount: null,
+                category: null
             }
         },
 
@@ -369,9 +336,26 @@
             },
 
             handleDeleted: function(id) {
-                document.getElementById('deleteProductAction').action = 'product/delete/' + id;
+                document.getElementById('deleteProductAction').action = '/dashboard/product/delete/' + id;
             },
+
+            amountShow: function() {
+                $('.footable').data('page-size', this.filled.amount);
+                $('.footable').trigger('footable_initialized');
+            }
         }
     })
+</script>
+
+<script src="{{asset('theme/js/plugins/footable/footable.all.min.js')}}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $('.footable').footable();
+        $('.footable2').footable();
+
+
+    });
 </script>
 @endsection

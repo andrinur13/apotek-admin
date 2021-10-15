@@ -1,318 +1,532 @@
 @extends('template/default')
 
 @section('content')
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-    </div>
-
-    <!-- Content Row -->
+<div class="wrapper wrapper-content">
     <div class="row">
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Earnings (Monthly)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+        <div class="col-lg-2">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <span class="label label-success float-right">Monthly</span>
+                    <h5>Views</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">386,200</h1>
+                    <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                    <small>Total views</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <span class="label label-info float-right">Annual</span>
+                    <h5>Orders</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">80,800</h1>
+                    <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+                    <small>New orders</small>
                 </div>
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Earnings (Annual)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+        <div class="col-lg-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <span class="label label-primary float-right">Today</span>
+                    <h5>visits</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="no-margins">406,42</h1>
+                            <div class="font-bold text-navy">44% <i class="fa fa-level-up"></i> <small>Rapid pace</small></div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        <div class="col-md-6">
+                            <h1 class="no-margins">206,12</h1>
+                            <div class="font-bold text-navy">22% <i class="fa fa-level-up"></i> <small>Slow pace</small></div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
+        <div class="col-lg-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Monthly income</h5>
+                    <div class="ibox-tools">
+                        <span class="label label-primary">Updated 12.2015</span>
+                    </div>
+                </div>
+                <div class="ibox-content no-padding">
+                    <div class="flot-chart m-t-lg" style="height: 55px;">
+                        <div class="flot-chart-content" id="flot-chart1"></div>
+                    </div>
+                </div>
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                            </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div>
+                        <span class="float-right text-right">
+                            <small>Average value of sales in the past month in: <strong>United states</strong></small>
+                            <br />
+                            All sales: 162,862
+                        </span>
+                        <h3 class="font-bold no-margins">
+                            Half-year revenue margin
+                        </h3>
+                        <small>Sales marketing.</small>
+                    </div>
+
+                    <div class="m-t-sm">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div>
+                                    <canvas id="lineChart" height="114"></canvas>
                                 </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="stat-list m-t-lg">
+                                    <li>
+                                        <h2 class="no-margins">2,346</h2>
+                                        <small>Total orders in period</small>
+                                        <div class="progress progress-mini">
+                                            <div class="progress-bar" style="width: 48%;"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h2 class="no-margins ">4,422</h2>
+                                        <small>Orders in last month</small>
+                                        <div class="progress progress-mini">
+                                            <div class="progress-bar" style="width: 60%;"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="m-t-md">
+                        <small class="float-right">
+                            <i class="fa fa-clock-o"> </i>
+                            Update on 16.07.2015
+                        </small>
+                        <small>
+                            <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
+                        </small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <span class="label label-warning float-right">Data has changed</span>
+                    <h5>User activity</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-4">
+                            <small class="stats-label">Pages / Visit</small>
+                            <h4>236 321.80</h4>
+                        </div>
+
+                        <div class="col-4">
+                            <small class="stats-label">% New Visits</small>
+                            <h4>46.11%</h4>
+                        </div>
+                        <div class="col-4">
+                            <small class="stats-label">Last week</small>
+                            <h4>432.021</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-4">
+                            <small class="stats-label">Pages / Visit</small>
+                            <h4>643 321.10</h4>
+                        </div>
+
+                        <div class="col-4">
+                            <small class="stats-label">% New Visits</small>
+                            <h4>92.43%</h4>
+                        </div>
+                        <div class="col-4">
+                            <small class="stats-label">Last week</small>
+                            <h4>564.554</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-4">
+                            <small class="stats-label">Pages / Visit</small>
+                            <h4>436 547.20</h4>
+                        </div>
+
+                        <div class="col-4">
+                            <small class="stats-label">% New Visits</small>
+                            <h4>150.23%</h4>
+                        </div>
+                        <div class="col-4">
+                            <small class="stats-label">Last week</small>
+                            <h4>124.990</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Custom responsive table </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#" class="dropdown-item">Config option 1</a>
+                            </li>
+                            <li><a href="#" class="dropdown-item">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-9 m-b-xs">
+                            <div data-toggle="buttons" class="btn-group btn-group-toggle">
+                                <label class="btn btn-sm btn-white"> <input type="radio" id="option1" name="options"> Day </label>
+                                <label class="btn btn-sm btn-white active"> <input type="radio" id="option2" name="options"> Week </label>
+                                <label class="btn btn-sm btn-white"> <input type="radio" id="option3" name="options"> Month </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control form-control-sm" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-primary" type="button">Go!</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
                     </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>#</th>
+                                    <th>Project </th>
+                                    <th>Name </th>
+                                    <th>Phone </th>
+                                    <th>Company </th>
+                                    <th>Completed </th>
+                                    <th>Task</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Project <small>This is example of project</small></td>
+                                    <td>Patrick Smith</td>
+                                    <td>0800 051213</td>
+                                    <td>Inceptos Hymenaeos Ltd</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                    <td>20%</td>
+                                    <td>Jul 14, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alpha project</td>
+                                    <td>Alice Jackson</td>
+                                    <td>0500 780909</td>
+                                    <td>Nec Euismod In Company</td>
+                                    <td><span class="pie">6,9</span></td>
+                                    <td>40%</td>
+                                    <td>Jul 16, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Betha project</td>
+                                    <td>John Smith</td>
+                                    <td>0800 1111</td>
+                                    <td>Erat Volutpat</td>
+                                    <td><span class="pie">3,1</span></td>
+                                    <td>75%</td>
+                                    <td>Jul 18, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gamma project</td>
+                                    <td>Anna Jordan</td>
+                                    <td>(016977) 0648</td>
+                                    <td>Tellus Ltd</td>
+                                    <td><span class="pie">4,9</span></td>
+                                    <td>18%</td>
+                                    <td>Jul 22, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alpha project</td>
+                                    <td>Alice Jackson</td>
+                                    <td>0500 780909</td>
+                                    <td>Nec Euismod In Company</td>
+                                    <td><span class="pie">6,9</span></td>
+                                    <td>40%</td>
+                                    <td>Jul 16, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Project <small>This is example of project</small></td>
+                                    <td>Patrick Smith</td>
+                                    <td>0800 051213</td>
+                                    <td>Inceptos Hymenaeos Ltd</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                    <td>20%</td>
+                                    <td>Jul 14, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gamma project</td>
+                                    <td>Anna Jordan</td>
+                                    <td>(016977) 0648</td>
+                                    <td>Tellus Ltd</td>
+                                    <td><span class="pie">4,9</span></td>
+                                    <td>18%</td>
+                                    <td>Jul 22, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Project <small>This is example of project</small></td>
+                                    <td>Patrick Smith</td>
+                                    <td>0800 051213</td>
+                                    <td>Inceptos Hymenaeos Ltd</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                    <td>20%</td>
+                                    <td>Jul 14, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alpha project</td>
+                                    <td>Alice Jackson</td>
+                                    <td>0500 780909</td>
+                                    <td>Nec Euismod In Company</td>
+                                    <td><span class="pie">6,9</span></td>
+                                    <td>40%</td>
+                                    <td>Jul 16, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Betha project</td>
+                                    <td>John Smith</td>
+                                    <td>0800 1111</td>
+                                    <td>Erat Volutpat</td>
+                                    <td><span class="pie">3,1</span></td>
+                                    <td>75%</td>
+                                    <td>Jul 18, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gamma project</td>
+                                    <td>Anna Jordan</td>
+                                    <td>(016977) 0648</td>
+                                    <td>Tellus Ltd</td>
+                                    <td><span class="pie">4,9</span></td>
+                                    <td>18%</td>
+                                    <td>Jul 22, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alpha project</td>
+                                    <td>Alice Jackson</td>
+                                    <td>0500 780909</td>
+                                    <td>Nec Euismod In Company</td>
+                                    <td><span class="pie">6,9</span></td>
+                                    <td>40%</td>
+                                    <td>Jul 16, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Project <small>This is example of project</small></td>
+                                    <td>Patrick Smith</td>
+                                    <td>0800 051213</td>
+                                    <td>Inceptos Hymenaeos Ltd</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                    <td>20%</td>
+                                    <td>Jul 14, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gamma project</td>
+                                    <td>Anna Jordan</td>
+                                    <td>(016977) 0648</td>
+                                    <td>Tellus Ltd</td>
+                                    <td><span class="pie">4,9</span></td>
+                                    <td>18%</td>
+                                    <td>Jul 22, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- Pending Requests Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Pending Requests</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <!-- Content Row -->
-
-    <div class="row">
-
-        <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pie Chart -->
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Direct
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Social
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> Referral
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Content Row -->
-    <div class="row">
-
-        <!-- Content Column -->
-        <div class="col-lg-6 mb-4">
-
-            <!-- Project Card Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                </div>
-                <div class="card-body">
-                    <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Color System -->
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-primary text-white shadow">
-                        <div class="card-body">
-                            Primary
-                            <div class="text-white-50 small">#4e73df</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-success text-white shadow">
-                        <div class="card-body">
-                            Success
-                            <div class="text-white-50 small">#1cc88a</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-info text-white shadow">
-                        <div class="card-body">
-                            Info
-                            <div class="text-white-50 small">#36b9cc</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-warning text-white shadow">
-                        <div class="card-body">
-                            Warning
-                            <div class="text-white-50 small">#f6c23e</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-danger text-white shadow">
-                        <div class="card-body">
-                            Danger
-                            <div class="text-white-50 small">#e74a3b</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-secondary text-white shadow">
-                        <div class="card-body">
-                            Secondary
-                            <div class="text-white-50 small">#858796</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-light text-black shadow">
-                        <div class="card-body">
-                            Light
-                            <div class="text-black-50 small">#f8f9fc</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-dark text-white shadow">
-                        <div class="card-body">
-                            Dark
-                            <div class="text-white-50 small">#5a5c69</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-lg-6 mb-4">
-
-            <!-- Illustrations -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="...">
-                    </div>
-                    <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                        constantly updated collection of beautiful svg images that you can use
-                        completely free and without attribution!</p>
-                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                        unDraw &rarr;</a>
-                </div>
-            </div>
-
-            <!-- Approach -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                </div>
-                <div class="card-body">
-                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                        custom components and custom utility classes.</p>
-                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                        Bootstrap framework, especially the utility classes.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 </div>
-<!-- /.container-fluid -->
+@endsection
 
-<!-- End of Main Content -->
+@section('script-custom')
+<script>
+    $(document).ready(function() {
 
 
+        var d1 = [
+            [1262304000000, 6],
+            [1264982400000, 3057],
+            [1267401600000, 20434],
+            [1270080000000, 31982],
+            [1272672000000, 26602],
+            [1275350400000, 27826],
+            [1277942400000, 24302],
+            [1280620800000, 24237],
+            [1283299200000, 21004],
+            [1285891200000, 12144],
+            [1288569600000, 10577],
+            [1291161600000, 10295]
+        ];
+        var d2 = [
+            [1262304000000, 5],
+            [1264982400000, 200],
+            [1267401600000, 1605],
+            [1270080000000, 6129],
+            [1272672000000, 11643],
+            [1275350400000, 19055],
+            [1277942400000, 30062],
+            [1280620800000, 39197],
+            [1283299200000, 37000],
+            [1285891200000, 27000],
+            [1288569600000, 21000],
+            [1291161600000, 17000]
+        ];
 
+        var data1 = [{
+                label: "Data 1",
+                data: d1,
+                color: '#17a084'
+            },
+            {
+                label: "Data 2",
+                data: d2,
+                color: '#127e68'
+            }
+        ];
+        $.plot($("#flot-chart1"), data1, {
+            xaxis: {
+                tickDecimals: 0
+            },
+            series: {
+                lines: {
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 1
+                        }, {
+                            opacity: 1
+                        }]
+                    },
+                },
+                points: {
+                    width: 0.1,
+                    show: false
+                },
+            },
+            grid: {
+                show: false,
+                borderWidth: 0
+            },
+            legend: {
+                show: false,
+            }
+        });
+
+        var lineData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                    label: "Example dataset",
+                    backgroundColor: "rgba(26,179,148,0.5)",
+                    borderColor: "rgba(26,179,148,0.7)",
+                    pointBackgroundColor: "rgba(26,179,148,1)",
+                    pointBorderColor: "#fff",
+                    data: [48, 48, 60, 39, 56, 37, 30]
+                },
+                {
+                    label: "Example dataset",
+                    backgroundColor: "rgba(220,220,220,0.5)",
+                    borderColor: "rgba(220,220,220,1)",
+                    pointBackgroundColor: "rgba(220,220,220,1)",
+                    pointBorderColor: "#fff",
+                    data: [65, 59, 40, 51, 36, 25, 40]
+                }
+            ]
+        };
+
+        var lineOptions = {
+            responsive: true
+        };
+
+
+        var ctx = document.getElementById("lineChart").getContext("2d");
+        new Chart(ctx, {
+            type: 'line',
+            data: lineData,
+            options: lineOptions
+        });
+
+
+    });
+</script>
 @endsection
