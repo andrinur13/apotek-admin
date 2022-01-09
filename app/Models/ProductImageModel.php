@@ -15,7 +15,7 @@ class ProductImageModel extends Model
     protected $fillable = ['id_img_product', 'id_product', 'img_path', 'is_primary'];
 
     public function storeImage($data) {
-        ProductImageModel::insert([
+        ProductImageModel::create([
             'id_product' => $data->id_product,
             'img_path' => $data->img_path,
             'is_primary' => 1

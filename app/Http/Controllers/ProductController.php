@@ -48,15 +48,23 @@ class ProductController extends Controller
             'harga_jual' => $harga_jual,
         ];
 
+        // dd($photo_product);
+
         $dataInsert = $this->product::create($data);
 
         // add image
         $productImage = new ProductImageModel();
 
+        $nama_product = str_replace(" ", "", $nama_product);
+        $nama_file = 'uploads/product/' . $nama_product . '-' . time() . '.' . $photo_product->getClientOriginalExtension();
+
+        $photo_product->move(public_path('uploads/product/'),  $nama_file);
+        $file_name = $nama_file;
+
         // data images
         $dataImage = new stdClass();
         $dataImage->id_product = $dataInsert->id_product;
-        $dataImage->img_path = 'testpath';
+        $dataImage->img_path = $file_name;
 
         $productImage->storeImage($dataImage);
 

@@ -27,6 +27,11 @@
                         <i class="fa fa-plus"></i>
                         Tambah Stok
                     </button>
+
+                    <button class="btn btn-sm btn-danger mt-2" data-toggle="modal" data-target="#delStock">
+                        <i class="fa fa-minus"></i>
+                        Kurangi Stok
+                    </button>
                 </div>
                 <div class="ibox-content">
                     @if(Session('status'))
@@ -81,9 +86,6 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary text-white btn-sm btn-circle" href="<?= 'product/detail/' . $p->id_product_stok; ?>">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
                                     <a class="btn btn-danger text-white btn-sm btn-circle" data-toggle="modal" data-target="#deleteProduct" v-on:click="handleDeleted({{$p->id_product_stok}})">
                                         <i class="fa fa-trash"></i>
                                     </a>
@@ -142,6 +144,50 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
                             <button type="submit" id="submit_productstock" class="btn btn-sm btn-primary">Tambah Stock</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="delStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kurangi Data Stock</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{$main_url . '/del' }}" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        <div class="row">
+                            <div class="col">
+                                <!-- nama product -->
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="nama_product">Nama Product</label>
+                                    <select name="id_product" data-placeholder="Choose a Country..." class="chosen-select" tabindex="2">
+                                        <option value="">Select</option>
+                                        @foreach($product as $p)
+                                        <option value="{{$p->id_product}}"> {{$p->nama_product}} - {{$p->category}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- stock product -->
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="stock_product">Kurangi Stock Product</label>
+                                    <input type="number" class="form-control" id="stock_product" name="stock_product" placeholder="Kurangi Stock Product...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" id="submit_productstock" class="btn btn-sm btn-danger">Kurangi Stock</button>
                         </div>
                     </form>
                 </div>

@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
         // product stock
         Route::get('/productstock', [ProductStockController::class, 'index']);
         Route::post('/productstock/add', [ProductStockController::class, 'store']);
+        Route::post('/productstock/del', [ProductStockController::class, 'minus']);
         Route::post('/productstock/delete/{id}', [ProductStockController::class, 'delete']);
 
         // user

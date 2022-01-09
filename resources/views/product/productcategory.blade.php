@@ -152,7 +152,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{url('productcategory/add')}}">
+            <form method="POST" action="{{url('dashboard/productcategory/add')}}">
                 {{csrf_field()}}
                 <div class="modal-body">
                     <!-- nama category -->

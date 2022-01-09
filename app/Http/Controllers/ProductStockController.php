@@ -52,6 +52,28 @@ class ProductStockController extends Controller
         return redirect($this->main_url)->with('status', 'Berhasil Menambahkan Stok');
     }
 
+    public function minus(Request $request)
+    {
+        $data = [
+            'id_product' => $request->id_product,
+            'stok' => $request->stock_product
+        ];
+
+
+        $dataquery = $this->productstock_model::where('id_product', $request->id_product)->first();
+
+        // dd($dataquery);
+
+        if ($dataquery == null) {
+            $this->productstock_model::create($data);
+        } else {
+            $this->productstock_model::where('id_product', $request->id_product)->decrement('stok', $request->stock_product);
+        }
+
+
+        return redirect($this->main_url)->with('status', 'Berhasil Mengurangi Stok');
+    }
+
     public function delete($id, Request $request)
     {
         $this->productstock_model::where('id_product_stok', $id)->delete();

@@ -31,67 +31,77 @@
                         <div class="tab-pane fade show active" id="detail-product" role="tabpanel" aria-labelledby="detail-product-tab">
                             <h3>Detail Product</h3>
 
-                            <!-- product name -->
-                            <div class="mt-4">
-                                <div class="form-group  row">
-                                    <label class="col-sm-2 col-form-label">Product</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control disabled" disabled readonly value="<?= $data->nama_product ?>">
+                            <div class="row">
+                                <div class="col">
+                                    <!-- product name -->
+                                    <div class="mt-4">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Product</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control disabled" disabled readonly value="<?= $data->nama_product ?>">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <!-- Berat -->
-                            <div class="mt-4">
-                                <div class="form-group  row">
-                                    <label class="col-sm-2 col-form-label">Berat</label>
-                                    <div class="col-sm-10">
-                                        <div class="input-group">
-                                            <input type="number" class="form-control disabled" disabled readonly value="<?= $data->berat ?>">
-                                            <div class="input-group-append">
-                                                <span class="input-group-addon">gram</span>
+                                    <!-- Berat -->
+                                    <div class="mt-4">
+                                        <div class="form-group  row">
+                                            <label class="col-sm-2 col-form-label">Berat</label>
+                                            <div class="col-sm-10">
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control disabled" disabled readonly value="<?= $data->berat ?>">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-addon">gram</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- category -->
+                                    <div class="mt-4">
+                                        <div class="form-group  row">
+                                            <label class="col-sm-2 col-form-label">Kategori</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control disabled" disabled readonly value="<?= $data->category ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- herga beli -->
+                                    <div class="mt-4">
+                                        <div class="form-group  row">
+                                            <label class="col-sm-2 col-form-label">Harga Beli</label>
+                                            <div class="col-sm-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-addon">Rp. </span>
+                                                    </div>
+                                                    <input type="number" class="form-control disabled" disabled readonly value="<?= $data->harga_beli ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- harga jual -->
+                                    <div class="mt-4">
+                                        <div class="form-group  row">
+                                            <label class="col-sm-2 col-form-label">Harga Jual</label>
+                                            <div class="col-sm-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-addon">Rp. </span>
+                                                    </div>
+                                                    <input type="number" class="form-control disabled" disabled readonly value="<?= $data->harga_jual ?>">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- category -->
-                            <div class="mt-4">
-                                <div class="form-group  row">
-                                    <label class="col-sm-2 col-form-label">Kategori</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control disabled" disabled readonly value="<?= $data->category ?>">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- herga beli -->
-                            <div class="mt-4">
-                                <div class="form-group  row">
-                                    <label class="col-sm-2 col-form-label">Harga Beli</label>
-                                    <div class="col-sm-10">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-addon">Rp. </span>
-                                            </div>
-                                            <input type="number" class="form-control disabled" disabled readonly value="<?= $data->harga_beli ?>">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- harga jual -->
-                            <div class="mt-4">
-                                <div class="form-group  row">
-                                    <label class="col-sm-2 col-form-label">Harga Jual</label>
-                                    <div class="col-sm-10">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-addon">Rp. </span>
-                                            </div>
-                                            <input type="number" class="form-control disabled" disabled readonly value="<?= $data->harga_jual ?>">
-                                        </div>
+                                <div class="col">
+                                    <div class="mt-4">
+                                        <img src="/{{$data->product_img->img_path}}" class="img-fluid" style="border-radius: 5px; max-width: 400px" alt="">
+                                        <hr>
                                     </div>
                                 </div>
                             </div>
