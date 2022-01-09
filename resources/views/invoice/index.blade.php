@@ -6,10 +6,10 @@
         <div class="col-lg-4">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <span class="label label-primary">Jumah Obat</span>
+                    <span class="label label-primary">Jumah Invoice</span>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"> 10 buah </h1>
+                    <h1 class="no-margins"> 10 invoice </h1>
                     <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
                     <!-- <small>Total views</small> -->
                 </div>
@@ -49,6 +49,7 @@
                                 <th>Invoice</th>
                                 <th>Total</th>
                                 <th>Status</th>
+                                <th>Date</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -67,6 +68,9 @@
                                     @endif
                                 </td>
                                 <td>
+                                    {{$iv->created_at}}
+                                </td>
+                                <td>
                                     <a class="btn btn-success text-white btn-sm btn-circle" href="<?= 'invoice/approve/' . $iv->id_invoice; ?>">
                                         <i class="fa fa-check"></i>
                                     </a>
@@ -78,6 +82,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            @php($i++)
                             @endforeach
                         </tbody>
                         <tfoot>
