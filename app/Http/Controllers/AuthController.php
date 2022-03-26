@@ -46,7 +46,7 @@ class AuthController extends Controller
             'password'  => $request->input('password'),
         ];
 
-        Auth::attempt($data);
+        $authCheck = Auth::attempt($data);
 
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             //Login Success

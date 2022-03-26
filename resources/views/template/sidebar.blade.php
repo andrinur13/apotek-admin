@@ -4,9 +4,9 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <img alt="image" class="rounded-circle" src="{{asset('theme/img/profile_small.jpg')}}" />
-                    <a data-toggle="dropdown" class="dropdown-toggle mt-2" href="#">
-                        <span class="block m-t-xs font-bold"> {{Auth::user()->name}} </span>
-                    </a>
+                    <div class="mt-4">
+                        <span class="text-white block m-t-xs font-bold"> {{Auth::user()->name}} </span>
+                    </div>
                 </div>
                 <div class="logo-element">
                     <i class="fa fa-bars"></i>
@@ -44,6 +44,7 @@
                     <li><a href="{{url('/dashboard/productstock')}}">Product Stock</a></li>
                 </ul>
             </li>
+            @role('superadmin')
             <li>
                 <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">User</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -51,6 +52,7 @@
                     <li><a href="{{url('/dashboard/user/users')}}">User</a></li>
                 </ul>
             </li>
+            @endrole
         </ul>
 
     </div>

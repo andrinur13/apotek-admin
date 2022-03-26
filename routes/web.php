@@ -57,18 +57,20 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/productstock/del', [ProductStockController::class, 'minus']);
         Route::post('/productstock/delete/{id}', [ProductStockController::class, 'delete']);
 
-        // user
-        Route::get('/user/role', [UserRoleController::class, 'index']);
-        Route::post('/user/role/add', [UserRoleController::class, 'store']);
-        Route::get('/user/role/detail/{id}', [UserRoleController::class, 'detail']);
-        Route::post('/user/role/delete/{id}', [UserRoleController::class, 'delete']);
-        Route::post('/user/role/update/{id}', [UserRoleController::class, 'update']);
+        Route::group(['middleware' => ['role:superadmin']], function() {
+            // user
+            Route::get('/user/role', [UserRoleController::class, 'index']);
+            Route::post('/user/role/add', [UserRoleController::class, 'store']);
+            Route::get('/user/role/detail/{id}', [UserRoleController::class, 'detail']);
+            Route::post('/user/role/delete/{id}', [UserRoleController::class, 'delete']);
+            Route::post('/user/role/update/{id}', [UserRoleController::class, 'update']);
 
-        Route::get('/user/users', [UserController::class, 'index']);
-        Route::post('/user/users/add', [UserController::class, 'store']);
-        Route::get('/user/users/detail/{id}', [UserController::class, 'detail']);
-        Route::post('/user/users/delete/{id}', [UserController::class, 'delete']);
-        Route::post('/user/users/update/{id}', [UserController::class, 'update']);
+            Route::get('/user/users', [UserController::class, 'index']);
+            Route::post('/user/users/add', [UserController::class, 'store']);
+            Route::get('/user/users/detail/{id}', [UserController::class, 'detail']);
+            Route::post('/user/users/delete/{id}', [UserController::class, 'delete']);
+            Route::post('/user/users/update/{id}', [UserController::class, 'update']);
+        });
 
         // invoice
         Route::get('/invoice', [InvoiceController::class, 'index']);
